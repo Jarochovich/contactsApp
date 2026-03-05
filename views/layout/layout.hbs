@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .window {
+            width: 550px;
+            height: 500px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .window-header {
+            padding: 15px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .window-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        
+        .window-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .window-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        .window-content::-webkit-scrollbar-thumb {
+            background: #4CAF50;
+            border-radius: 4px;
+        }
+        
+        .window-content::-webkit-scrollbar-thumb:hover {
+            background: #45a049;
+        }
+        
+        .contact-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+        
+        .contact-item:hover {
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
+        
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-name {
+            font-size: 15px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .contact-phone {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-family: monospace;
+            font-weight: bold;
+        }
+        
+        .window-footer {
+            display: block;
+            padding: 12px 20px;
+            border-top: 1px solid #e0e0e0;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        .input-footer {
+            display: flex;
+            margin-bottom: 15px;
+            justify-content: space-between;
+        }
+
+        .inp {
+            padding: 5px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #cbcbcb;
+            width: 45%;
+        }
+
+        .btn-footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-add {
+            background-color: #4CAF50;
+            width: 100%;
+            color: white;
+        }
+        
+        .btn-add:hover {
+            background-color: #45a049;
+        }
+        
+        .btn-cancel {
+            background-color: #f4a836;
+            width: 100%;
+            color: white;
+        }
+        
+        .btn-cancel:hover {
+            background-color: #f4a836cb;
+        }
+
+        .btn-del {
+            background-color: #f44336;
+            width: 100%;
+            color: white;
+        }
+
+        .btn-del:hover {
+            background-color: #f44336cb;
+        }
+
+        
+        .contact-count {
+            text-align: right;
+            font-size: 12px;
+            color: #666;
+            padding: 5px 15px 0;
+        }
+
+        .ref {
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .mainPhone {
+            width: 100%;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="window">
+      {{{body}}}
+    </div>
+</body>
+</html>
