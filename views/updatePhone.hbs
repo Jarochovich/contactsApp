@@ -1,56 +1,54 @@
-        <div class="contact-count">
-            Всего контактов: {{data.length}}
-        </div>
+<div class="contact-count">
+    Всего контактов: {{data.length}}
+</div>
         
-        <div class="window-content">
-            {{#each data}}
-            <div class="contact-item">
-                <span class="contact-name">{{this.name}}</span>
-                <span class="contact-phone">{{this.phone}}</span>
-            </div>
-            {{/each}}
-        </div>
+<div class="window-content">
+    {{#each data}}
+    <div class="contact-item">
+        <span class="contact-name">{{this.name}}</span>
+        <span class="contact-phone">{{this.phone}}</span>
+    </div>
+    {{/each}}
+</div>
         
-        <div class="window-footer">
-
-            <form method="post">
-                <input type="hidden" name="originalName" value="{{name}}"/>
-                <div class="input-footer">
-                    <input name="name" class="inp name" onchange="blockDelete()" placeholder="ФИО" required value="{{name}}"/>
-                    <input name="phone" class="inp phone" onchange="blockDelete()" placeholder="Телефон" required value="{{phone}}"/>
-                </div>
-
-                <div class="btn-footer">
-                    {{> updatePhonePart}}
-                </div>
-            </form>
-
+<div class="window-footer">
+    <form method="post">
+        <input type="hidden" name="originalName" value="{{name}}"/>
+        <div class="input-footer">
+            <input name="name" class="inp name" onchange="blockDelete()" placeholder="ФИО" required value="{{name}}"/>
+            <input name="phone" class="inp phone" onchange="blockDelete()" placeholder="Телефон" required value="{{phone}}"/>
         </div>
+        <div class="btn-footer">
+            {{> updatePhonePart}}
+        </div>
+    </form>
+</div>
 
-        <script>
-            function deleteContact(name) {
-                if (confirm(`Удалить контакт?`)) {
-                    fetch("/Delete", {
-                        method: 'POST',
-                        headers: {
-                            'Content-type': 'application/json'
-                        },
-                        body: JSON.stringify({name: name})
-                    }).then(() => {
-                        window.location.href = '/';
-                    });
-                }
-            }
+<script>
+    
+function deleteContact(name) {
+    if (confirm(`Удалить контакт?`)) {
+        fetch("/Delete", {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({name: name})
+        }).then(() => {
+            window.location.href = '/';
+        });
+    }
+}
 
-            function blockDelete() {
-                const nameInp = document.querySelector('.name').value;
-                const phoneInp = document.querySelector('.phone').value;
-                const deleteBtn = document.querySelector('.btn-del');
-                
-                if (nameInp == `{{name}}` && phoneInp == `{{phone}}`) {
-                    deleteBtn.disabled = false;
-                } else {
-                    deleteBtn.disabled = true;
-                }
-            }
-        </script>
+function blockDelete() {
+    const nameInp = document.querySelector('.name').value;
+    const phoneInp = document.querySelector('.phone').value;
+    const deleteBtn = document.querySelector('.btn-del');
+    
+    if (nameInp == `{{name}}` && phoneInp == `{{phone}}`) {
+        deleteBtn.disabled = false;
+    } else {
+        deleteBtn.disabled = true;
+    }
+}
+</script> 

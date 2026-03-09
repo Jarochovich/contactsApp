@@ -1,29 +1,25 @@
-
+<div class="contact-count">
+    Всего контактов: {{data.length}}
+</div>
         
-        <div class="contact-count">
-            Всего контактов: {{data.length}}
-        </div>
+<div class="window-content">
+    {{#each data}}
+    <div class="contact-item">
+        <span class="contact-name">{{this.name}}</span>
+        <span class="contact-phone">{{this.phone}}</span>
+    </div>
+    {{/each}}
+</div>
         
-        <div class="window-content">
-            {{#each data}}
-            <div class="contact-item">
-                <span class="contact-name">{{this.name}}</span>
-                <span class="contact-phone">{{this.phone}}</span>
-            </div>
-            {{/each}}
+<div class="window-footer">
+    <form method="post">
+        <div class="input-footer">
+            <input name="name" class="inp" placeholder="ФИО" required />
+            <input name="phone" class="inp" placeholder="Телефон" required />
         </div>
-        
-        <div class="window-footer">
 
-            <form method="post">
-                <div class="input-footer">
-                    <input name="name" class="inp" placeholder="ФИО" required />
-                    <input name="phone" class="inp" placeholder="Телефон" required />
-                </div>
-
-                <div class="btn-footer">
-                    {{> addPhonePart}}
-                </div>
-            </form>
-
+        <div class="btn-footer">
+            {{> addPhonePart}}
         </div>
+    </form>
+</div>

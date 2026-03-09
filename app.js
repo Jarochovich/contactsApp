@@ -44,14 +44,14 @@ hbs.registerPartials(__dirname + `/views/partial`);
 // });
 
 // METHODS
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
     res.render("phone", {
         title: 'Главная',
         data: data
     });
 });
 
-app.get("/Add",  (req, res) => {
+app.get("/Add",  (_, res) => {
     res.render("addPhone", {
         title: 'Добавление номера',
         data
@@ -60,24 +60,27 @@ app.get("/Add",  (req, res) => {
 
 app.post("/Add", urlencodedParser, (req, res) => {
 
-    console.log(`Пришли данные: ${req.body}`);
-    console.log(`Имя: ${req.body.name}; Телефон: ${req.body.phone}`);
+    const newContact = {
+        // id: Date.now().toString(),
+        name: req.body.name,
+        phone: req.body.phone
+    };
 
-    const body = {'name': req.body.name, 'phone': req.body.phone};
-
-    data.push(body);
+    data.push(newContact);
     fs.writeFileSync(process.env.PATH_DATA, JSON.stringify(data, null, 2));
 
     res.redirect("/");
 });
-
+// Есть проблема с тем, что в случае совпадения имен точь в точь, при удалении одного
+// из элементов удалятся оба. Позже исправим
 app.get("/Update", (req, res) => {
     let name = req.query.name;
 
     let contact = data.find(contact => contact.name === name);
 
-    console.log(name);
-    console.log(contact.phone);
+    if (!contact) {
+        res.status(404).send('Контакт не найден!');
+    }
 
     res.render("updatePhone", {
         title: 'Изменение номера',
@@ -88,11 +91,8 @@ app.get("/Update", (req, res) => {
 });
 
 app.post("/Update", urlencodedParser, (req, res) => {
-    const {originalName, name, phone } = req.body;
 
-    console.log('Оригинальное имя:', originalName);
-    console.log('Новое имя:', name);
-    console.log('Новый телефон:', phone);
+    const {originalName, name, phone } = req.body;
 
     let contactIndex = data.findIndex(contact => contact.name === originalName);
 
@@ -101,12 +101,10 @@ app.post("/Update", urlencodedParser, (req, res) => {
 
     fs.writeFileSync(process.env.PATH_DATA, JSON.stringify(data, null, 2));
     
-    
     res.redirect("/");
 });
 
 app.post("/Delete", (req, res) => {
-    console.log('Сработал post');
 
     const name = req.body.name;
 
@@ -117,13 +115,12 @@ app.post("/Delete", (req, res) => {
     res.redirect("/");
 });
 
-app.get("/Delete", (req, res) => {
-    console.log('Сработал get');
+app.get("/Delete", (_, res) => {
 
     res.redirect("/");
 })
 
-app.use((req, res) => {
+app.use((_, res) => {
     res.status(404).json({message: "Ничего не найдено"});
 })
 
